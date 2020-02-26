@@ -15,12 +15,13 @@ mongoose.connection
     .once("open", ()=> console.log("Connecté à Mlab"))
     .on("error", error => console.log(`Erreur de connexion à Mlab ${error}`))
 
-expressServer.use(morgan("combined"))
-expressServer.use(bodyParser.json({type: '*/'}));
+expressServer.use(morgan("combined"));
+expressServer.use(bodyParser.json({ type: "*/*" }));
+expressServer.use(bodyParser.urlencoded({ extended: true }));
 
-const port = 3008
+const port = 3008;
 const server = http.createServer(expressServer);
 router(expressServer);
 
-server.listen(port)
-console.log(`Le serveur ecoute sur le port ${port}`);
+server.listen(port);
+console.log(`Le serveur ecoute sur le port : ${port}`);

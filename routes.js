@@ -1,7 +1,6 @@
+const AuthentificationController = require('./controllers/authentification')
+
 module.exports = function (expressServer) {
-    expressServer.get("/", (req, res, next) => {
-        res.send({
-            serverData : ["Alex", "Alexiane", "Méliane"]
-        })
-    })
+    
+    expressServer.post("/signup", AuthentificationController.signup)
 }
