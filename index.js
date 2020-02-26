@@ -10,6 +10,7 @@ expressServer.use(bodyParser.json({type: '*/'}));
 
 const port = 3008
 const server = http.createServer(expressServer);
+router(expressServer);
 
 server.listen(port)
 console.log(`Le serveur ecoute sur le port ${port}`);
