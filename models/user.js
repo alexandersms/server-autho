@@ -24,6 +24,14 @@ userSchema.pre("save", function(next){
     })
 })
 
+userSchema.methods.isPasswordEqualTo = function(externalPassword, done){
+    bcrypt.compare(externalPassword, this.password, (err, isMatch) => {
+        if (err) {
+            return done(err)
+        }
+        done(null, isMatch)
+    })
+}
 const UserModel = mongoose.model("user", userSchema);
 
 module.exports = UserModel;
