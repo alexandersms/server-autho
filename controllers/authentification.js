@@ -1,5 +1,15 @@
 const User = require("../models/user");
 const lodash = require("lodash");
+const jwt = require('jwt-simple');
+const config = require("../config");
+
+function getTokenForUser(user) {
+    const timeStamp = new Date().getTime();
+    return jwt.encode({
+        sub : user.id,
+        iat: timeStamp
+    }, config.secret)
+}
 
 exports.signup = function (req, res, next) {
     const email = req.body.email;
@@ -27,7 +37,7 @@ exports.signup = function (req, res, next) {
                 if (err) {
                     return next(err)
                 } else {
-                    res.json(user)
+                    res.json({token: getTokenForUser(user)})
                 }
             })
         }
